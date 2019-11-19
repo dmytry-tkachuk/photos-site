@@ -3,8 +3,9 @@ import "./app.sass"
 import GalleryList from "../gallery-list/gallery-list";
 import Slider from "../slider/slider";
 import Header from "../header/header";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import HomePage from "../pages/home-page/home-page";
+import PhotoCard from "../photo-card/photo-card";
 
 class App extends Component {
 
@@ -36,37 +37,53 @@ class App extends Component {
                             exact
                         />
                         <Route
-                            path={"/all"}
+                            path={"/all/"}
                             render={ () => {
                                 return <HomePage/>
                             }}
                             exact
                         />
                         <Route
-                            path={"/animal"}
-                            render={ () => {
-                                return <GalleryList id={3330452} />
+                            path={"/animal/:id"}
+                            render={ ({match}) => {
+                                return <GalleryList id={match.params.id} />
                             }}
                             exact
                         />
                         <Route
-                            path={"/films"}
-                            render={ () => {
-                                return <GalleryList id={4694315} />
+                            path={"/photo/:id"}
+                            render={ ({ match, location, history }) => {
+                                return <PhotoCard id = {match.params.id} history={history}/>
                             }}
                             exact
                         />
                         <Route
-                            path={"/food&drink"}
-                            render={ () => {
-                                return <GalleryList id={3330455} />
+                            path={"/films/:id"}
+                            render={ ({match}) => {
+                                return <GalleryList id={match.params.id} />
                             }}
                             exact
                         />
                         <Route
-                            path={"/nature"}
+                            path={"/food&drink/:id"}
+                            render={ ({match}) => {
+                                return <GalleryList id={match.params.id} />
+                            }}
+                            exact
+                        />
+                        <Route
+                            path={"/nature/:id"}
+                            render={ ({match}) => {
+                                return <GalleryList id={match.params.id} />
+                            }}
+                            exact
+                        />
+                        <Route
+                            path={"/login/"}
                             render={ () => {
-                                return <GalleryList id={3330448} />
+                                const login = false;
+                                if(!login) return <Redirect to={"/all/"} />
+                                return <div>Some important content</div>
                             }}
                             exact
                         />

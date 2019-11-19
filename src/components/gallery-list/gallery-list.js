@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import GalleryService from "../../servise";
 import "./gallery_list.sass"
+import {Link} from "react-router-dom";
 
 const service = new GalleryService();
 
@@ -13,6 +14,20 @@ export default class GalleryList extends Component {
     };
 
     componentDidMount() {
+        this.getPhotos()
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.id !== this.props.id) {
+            this.setState({
+                list: [],
+                page: 1,
+                loading: true
+            }, () => this.getPhotos());
+        }
+    }
+
+    getPhotos = () => {
         const {page} = this.state;
         const {id} = this.props;
         service.getPhotos(page, id)
@@ -53,11 +68,14 @@ export default class GalleryList extends Component {
                     {
                         list.map((el) => {
                             return(
-                                <div className={`photo-item`} key = {el.id}>
+                                <Link
+                                    to={`/photo/${el.id}`}
+                                    className={`photo-item`}
+                                    key = {el.id}>
                                     <div className="img">
                                         <img key={el.id} src={el.urls.small} alt=""/>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         })
                     }
