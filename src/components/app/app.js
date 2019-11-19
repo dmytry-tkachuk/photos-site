@@ -36,9 +36,37 @@ class App extends Component {
                             exact
                         />
                         <Route
+                            path={"/all"}
+                            render={ () => {
+                                return <HomePage/>
+                            }}
+                            exact
+                        />
+                        <Route
                             path={"/animal"}
                             render={ () => {
                                 return <GalleryList id={3330452} />
+                            }}
+                            exact
+                        />
+                        <Route
+                            path={"/films"}
+                            render={ () => {
+                                return <GalleryList id={4694315} />
+                            }}
+                            exact
+                        />
+                        <Route
+                            path={"/food&drink"}
+                            render={ () => {
+                                return <GalleryList id={3330455} />
+                            }}
+                            exact
+                        />
+                        <Route
+                            path={"/nature"}
+                            render={ () => {
+                                return <GalleryList id={3330448} />
                             }}
                             exact
                         />
