@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import "./photo-card.sass"
 import GalleryService from "../../servise";
 import Loader from "../loader/loader";
+import { withRouter } from 'react-router';
 
 const service = new GalleryService();
 
-export default class PhotoCard extends Component {
+class PhotoCard extends Component {
 
     state = {
         photo: false
@@ -32,3 +33,5 @@ export default class PhotoCard extends Component {
         )
     }
 }
+
+export default withRouter(PhotoCard)

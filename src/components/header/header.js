@@ -13,6 +13,7 @@ const categories = {
 export default class Header extends Component {
 
     render() {
+
         return(
             <div className={"header"}>
                 <NavLink to={"/"} className="logo"><img src={logo}/></NavLink>
@@ -26,5 +27,21 @@ export default class Header extends Component {
                 <NavLink to={"/login/"} className="item">Login</NavLink>
             </div>
         )
+    }
+}
+
+Header.defaultProps = {
+    headerId: 0
+};
+
+Header.propTypes = {
+    headerId: (props, propName, componentName) => {
+        const value = props[propName];
+
+        if(typeof value === "number" && !isNaN(value)) {
+            return;
+        }
+
+        return new TypeError(`${componentName}: ${propName} must be a number`)
     }
 }
